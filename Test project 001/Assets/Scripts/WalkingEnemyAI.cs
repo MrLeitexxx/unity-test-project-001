@@ -30,7 +30,7 @@ public class WalkingEnemyAI : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 
-		Debug.Log ("Monster has collided with " + col.collider.tag);
+		//Debug.Log ("Monster has collided with " + col.collider.tag);
 
 		if (col.collider.tag == "Obstacle" || col.collider.tag == "Enemy") {
 

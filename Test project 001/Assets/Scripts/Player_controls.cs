@@ -10,10 +10,12 @@ public class Player_controls : MonoBehaviour {
 	public int playerJumpPower = 1150;
 	private float moveX;
 	public bool isGrounded = false;
+	private Vector3 originalSize = new Vector3(0,0,0);
 
 	// Use this for initialization
 	void Start () {
-		
+
+		originalSize = gameObject.transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -68,17 +70,17 @@ public class Player_controls : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col){
 
-		Debug.Log (col.collider.name);
+		//Debug.Log (col.collider.name);
 		if (col.collider.tag == "Ground" || col.collider.name.Contains("platform")) {
-			isGrounded = true;
-		}
 
-		if (col.collider.tag == "Enemy") {
+			isGrounded = true;
+		
+		} else if (col.collider.tag == "Enemy") {
 
 			Die ();
-		}
 
-		if (col.collider.tag == "LevelEnd") {
+		} 
+		else if (col.collider.tag == "LevelEnd") {
 
 			SceneManager.LoadScene ("EndScreen001");
 		}
@@ -88,7 +90,9 @@ public class Player_controls : MonoBehaviour {
 	void Die(){
 
 		Debug.Log ("Player has Died!");
+		gameObject.transform.localScale = originalSize;
 		gameObject.transform.position = new Vector3 (-4.5f, -2.5f, gameObject.transform.position.z);
+		facingRight = true;
 	}
 				
 }
